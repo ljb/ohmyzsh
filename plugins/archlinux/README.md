@@ -28,7 +28,7 @@ plugins=(... archlinux)
 | pacrep       | `pacman -Si`                           | Display information about a package in the repositories          |
 | pacreps      | `pacman -Ss`                           | Search for packages in the repositories                          |
 | pacrmorphans | `sudo pacman -Rs $(pacman -Qtdq)`      | Delete all orphaned packages                                     |
-| pacupd       | `sudo pacman -Sy`                      | Update and refresh local package, ABS and AUR databases          |
+| pacupd       | `sudo pacman -Sy`                      | Update and refresh local package                                 |
 | pacupg       | `sudo pacman -Syu`                     | Sync with repositories before upgrading packages                 |
 | pacfileupg   | `sudo pacman -Fy`                      | Download fresh package databases from the server                 |
 | pacfiles     | `pacman -F`                            | Search package file names for matching strings                   |
@@ -74,8 +74,8 @@ upgrades were available. Use `pacman -Que` instead.
 | aurrep  | `aura -Ai`                                      | Display information about a package from AUR                            |
 | aureps  | `aura -As --both`                               | Search for packages in the repositories and AUR                         |
 | auras   | `aura -As --both`                               | Same as above                                                           |
-| auupd   | `sudo aura -Sy`                                 | Update and refresh local package, ABS and AUR databases                 |
-| auupg   | `sudo sh -c "aura -Syu              && aura -Au"` | Sync with repositories before upgrading all packages (from AUR too)   |
+| auupd   | `sudo aura -Sy`                                 | Update and refresh local package                                        |
+| auupg   | `sudo sh -c "aura -Syu && aura -Au"`            | Sync with repositories before upgrading all packages (from AUR too)     |
 | ausu    | `sudo sh -c "aura -Syu --no-confirm && aura -Au --no-confirm"` | Same as `auupg`, but without confirmation                |
 | upgrade[¹](#f1) | `sudo aura -Syu`                        | Sync with repositories before upgrading packages                        |
 
@@ -102,7 +102,7 @@ upgrades were available. Use `pacman -Que` instead.
 | parem   | `pacaur -Rns`                     | Remove packages, including its settings and unneeded dependencies   |
 | parep   | `pacaur -Si`                      | Display information about a package in the repositories             |
 | pareps  | `pacaur -Ss`                      | Search for packages in the repositories                             |
-| paupd   | `pacaur -Sy`                      | Update and refresh local package, ABS and AUR databases             |
+| paupd   | `pacaur -Sy`                      | Update and refresh local package                                    |
 | paupg   | `pacaur -Syua`                    | Sync with repositories before upgrading all packages (from AUR too) |
 | pasu    | `pacaur -Syua --no-confirm`       | Same as `paupg`, but without confirmation                           |
 | upgrade[¹](#f1) | `pacaur -Syu`             | Sync with repositories before upgrading packages                    |
@@ -126,7 +126,7 @@ upgrades were available. Use `pacman -Que` instead.
 | trrem   | `trizen -Rns`                     | Remove packages, including its settings and unneeded dependencies   |
 | trrep   | `trizen -Si`                      | Display information about a package in the repositories             |
 | trreps  | `trizen -Ss`                      | Search for packages in the repositories                             |
-| trupd   | `trizen -Sy`                      | Update and refresh local package, ABS and AUR databases             |
+| trupd   | `trizen -Sy`                      | Update and refresh local package                                    |
 | trupg   | `trizen -Syua`                    | Sync with repositories before upgrading all packages (from AUR too) |
 | trsu    | `trizen -Syua --no-confirm`       | Same as `trupg`, but without confirmation                           |
 | upgrade[¹](#f1) | `trizen -Syu`             | Sync with repositories before upgrading packages                    |
@@ -150,10 +150,54 @@ upgrades were available. Use `pacman -Que` instead.
 | yarem   | `yay -Rns`                     | Remove packages, including its settings and unneeded dependencies |
 | yarep   | `yay -Si`                      | Display information about a package in the repositories           |
 | yareps  | `yay -Ss`                      | Search for packages in the repositories                           |
-| yaupd   | `yay -Sy`                      | Update and refresh local package, ABS and AUR databases           |
+| yaupd   | `yay -Sy`                      | Update and refresh local package                                  |
 | yaupg   | `yay -Syu`                     | Sync with repositories before upgrading packages                  |
 | yasu    | `yay -Syu --no-confirm`        | Same as `yaupg`, but without confirmation                         |
 | upgrade[¹](#f1) | `yay -Syu`             | Sync with repositories before upgrading packages                  |
+
+#### Pikaur
+
+| Alias           | Command                    | Description                                                       |
+|-----------------|----------------------------|-------------------------------------------------------------------|
+| piclean         | `pikaur -Sc`               | Clean out old and unused caches and packages                      |
+| piclr           | `pikaur -Scc`              | Remove all files from the cache                                   |
+| piin            | `pikaur -S`                | Install packages from the repositories                            |
+| piins           | `pikaur -U`                | Install a package from a local file                               |
+| piinsd          | `pikaur -S --asdeps`       | Install packages as dependencies of another package               |
+| piloc           | `pikaur -Qi`               | Display information about a package in the local database         |
+| pilocs          | `pikaur -Qs`               | Search for packages in the local database                         |
+| pilst           | `pikaur -Qe`               | List installed packages including from AUR (tagged as "local")    |
+| pimir           | `pikaur -Syy`              | Force refresh of all package lists after updating mirrorlist      |
+| piorph          | `pikaur -Qtd`              | Remove orphans using pikaur                                       |
+| pire            | `pikaur -R`                | Remove packages, keeping its settings and dependencies            |
+| pirem           | `pikaur -Rns`              | Remove packages, including its settings and unneeded dependencies |
+| pirep           | `pikaur -Si`               | Display information about a package in the repositories           |
+| pireps          | `pikaur -Ss`               | Search for packages in the repositories                           |
+| piupd           | `pikaur -Sy`               | Update and refresh local package                                  |
+| piupg           | `pikaur -Syu`              | Sync with repositories before upgrading packages                  |
+| pisu            | `pikaur -Syu --no-confirm` | Same as `piupg`, but without confirmation                         |
+| upgrade[¹](#f1) | `pikaur -Syu`              | Sync with repositories before upgrading packages                  |
+
+#### Aurman
+
+| Alias           | Command                    | Description                                                       |
+|-----------------|----------------------------|-------------------------------------------------------------------|
+| auclean         | `aurman -Sc`               | Clean out old and unused caches and packages                      |
+| auclr           | `aurman -Scc`              | Remove all files from the cache                                   |
+| auin            | `aurman -S`                | Install packages from the repositories                            |
+| auins           | `aurman -U`                | Install a package from a local file                               |
+| auinsd          | `aurman -S --asdeps`       | Install packages as dependencies of another package               |
+| auloc           | `aurman -Qi`               | Display information about a package in the local database         |
+| aulocs          | `aurman -Qs`               | Search for packages in the local database                         |
+| aulst           | `aurman -Qe`               | List installed packages including from AUR (tagged as "local")    |
+| auorph          | `aurman -Qtd`              | Remove orphans using aurman                                       |
+| aure            | `aurman -R`                | Remove packages, keeping its settings and dependencies            |
+| aurem           | `aurman -Rns`              | Remove packages, including its settings and unneeded dependencies |
+| aurep           | `aurman -Si`               | Display information about a package in the repositories           |
+| aureps          | `aurman -Ss`               | Search for packages in the repositories                           |
+| auupg           | `aurman -Syu`              | Sync with repositories before upgrading packages                  |
+| ausu            | `aurman -Syu --no-confirm` | Same as `auupg`, but without confirmation                         |
+| upgrade[¹](#f1) | `aurman -Syu`              | Sync with repositories before upgrading packages                  |
 
 ---
 
@@ -165,6 +209,8 @@ whether the package manager is installed, checked in the following order:
 2. `trizen`
 3. `pacaur`
 4. `aura`
+4. `pikaur`
+4. `aurman`
 5. `pacman`
 
 ## Contributors
@@ -182,3 +228,4 @@ whether the package manager is installed, checked in the following order:
 - Jeff M. Hubbard - jeffmhubbard@gmail.com
 - K. Harishankar(harishnkr) - hari2menon1234@gmail.com
 - WH-2099 - wh2099@outlook.com
+- Jonas Bengtsson - jonas@bengtsson.cc

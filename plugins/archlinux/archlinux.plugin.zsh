@@ -176,6 +176,48 @@ if (( $+commands[yay] )); then
   alias yaupd="yay -Sy"
 fi
 
+if (( $+commands[pikaur] )); then
+  alias piconf='pikaur -Pg'
+  alias piclean='pikaur -Sc'
+  alias piclr='pikaur -Scc'
+  alias piupg='pikaur -Syu'
+  alias pisu='pikaur -Syu --noconfirm'
+  alias piin='pikaur -S'
+  alias piins='pikaur -U'
+  alias pire='pikaur -R'
+  alias pirem='pikaur -Rns'
+  alias pirep='pikaur -Si'
+  alias pireps='pikaur -Ss'
+  alias piloc='pikaur -Qi'
+  alias pilocs='pikaur -Qs'
+  alias pilst='pikaur -Qe'
+  alias piorph='pikaur -Qtd'
+  alias piinsd='pikaur -S --asdeps'
+  alias pimir='pikaur -Syy'
+  alias piupd="pikaur -Sy"
+fi
+
+if (( $+commands[aurman] )); then
+  alias auconf='aurman -Pg'
+  alias auclean='aurman -Sc'
+  alias auclr='aurman -Scc'
+  alias auupg='aurman -Syu'
+  alias ausu='aurman -Syu --noconfirm'
+  alias auin='aurman -S'
+  alias auins='aurman -U'
+  alias aure='aurman -R'
+  alias aurem='aurman -Rns'
+  alias aurep='aurman -Si'
+  alias aureps='aurman -Ss'
+  alias auloc='aurman -Qi'
+  alias aulocs='aurman -Qs'
+  alias aulst='aurman -Qe'
+  alias auorph='aurman -Qtd'
+  alias auinsd='aurman -S --asdeps'
+  alias aumir='aurman -Syy'
+  alias auupd="aurman -Sy"
+fi
+
 # Check Arch Linux PGP Keyring before System Upgrade to prevent failure.
 function upgrade() {
   echo ":: Checking Arch Linux PGP Keyring..."
@@ -197,6 +239,10 @@ function upgrade() {
     pacaur -Syu
   elif (( $+commands[aura] )); then
     sudo aura -Syu
+  elif (( $+commands[pikman] )); then
+    sudo pikman -Syu
+  elif (( $+commands[aurman] )); then
+    sudo aurman -Syu
   else
     sudo pacman -Syu
   fi
